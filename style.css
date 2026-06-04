@@ -477,21 +477,24 @@ section h2 .section-num {
     border: 1px solid var(--card-border);
     border-radius: 20px;
     overflow: hidden;
-    background: var(--bg-card);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .accordion-item:hover {
-    border-color: rgba(92, 141, 53, 0.3);
-    box-shadow: var(--shadow-md);
+    border-color: rgba(139, 61, 255, 0.3);
+    box-shadow: 0 12px 30px rgba(139, 61, 255, 0.12);
+    transform: translateY(-3px);
 }
 
 .accordion-header {
     width: 100%;
-    background: none;
+    background: transparent;
     border: none;
-    padding: 25px 35px;
+    border-left: 4px solid transparent;
+    padding: 25px 35px 25px 31px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -503,33 +506,38 @@ section h2 .section-num {
     transition: all 0.3s ease;
 }
 
-.accordion-header:hover, .accordion-header.active {
-    background: rgba(92, 141, 53, 0.03);
+.accordion-header:hover {
+    background: linear-gradient(90deg, rgba(139, 61, 255, 0.05) 0%, rgba(255,255,255,0) 100%);
     color: var(--primary-color);
 }
 
-.accordion-header::after {
-    content: '';
-    flex: 1;
-    border-bottom: 2px dashed var(--primary-color);
-    opacity: 0.2;
-    margin: 0 25px;
-    order: 1;
+.accordion-header.active {
+    background: linear-gradient(90deg, rgba(139, 61, 255, 0.08) 0%, rgba(255,255,255,0) 100%);
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
 }
 
 .accordion-header .icon {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    color: var(--accent-light);
+    color: var(--text-muted);
+    background: rgba(0, 0, 0, 0.04);
+    padding: 6px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
 }
 
 .accordion-header:hover .icon {
-    color: var(--accent-color);
+    color: #fff;
+    background: var(--primary-color);
     transform: scale(1.1);
 }
 
 .accordion-header.active .icon {
     transform: rotate(180deg);
-    color: var(--primary-color);
+    color: #fff;
+    background: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(139, 61, 255, 0.3);
 }
 
 .accordion-content {
