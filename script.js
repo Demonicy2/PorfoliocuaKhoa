@@ -85,8 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             
-            // Close sidebar after clicking a link
-            if (sidebar) {
+            // Close sidebar only on mobile (desktop keeps it open)
+            if (window.innerWidth <= 992 && sidebar) {
                 sidebar.classList.remove('active');
                 document.body.classList.remove('sidebar-open');
             }
