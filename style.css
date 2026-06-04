@@ -32,6 +32,13 @@ body {
     line-height: 1.7;
     min-height: 100vh;
     padding-bottom: 80px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+strong {
+    font-weight: 800;
+    color: var(--text-main);
 }
 
 .container {
@@ -185,13 +192,13 @@ body {
 }
 
 section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
+    font-size: 2.8rem;
+    margin-bottom: 45px;
     color: var(--text-main);
     font-weight: 800;
     display: flex;
     align-items: center;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.8px;
 }
 
 section h2::after {
@@ -388,9 +395,10 @@ section h2 .section-num {
 }
 
 .info-item p {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    line-height: 1.8;
+    color: var(--text-main);
+    font-size: 1.15rem;
+    line-height: 1.85;
+    opacity: 0.85;
 }
 
 .tech-list {
@@ -399,7 +407,7 @@ section h2 .section-num {
 
 .tech-list li {
     margin-bottom: 15px;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--text-main);
     padding-bottom: 15px;
     border-bottom: 1px solid var(--card-border);
@@ -556,9 +564,11 @@ section h2 .section-num {
 }
 
 .content-inner p {
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    font-size: 1.05rem;
+    color: var(--text-main);
+    margin-bottom: 25px;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    opacity: 0.85;
 }
 
 .pdf-container {
