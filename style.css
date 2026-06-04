@@ -116,9 +116,11 @@ strong {
 .bubble-6 { top: 85%; left: 55%; animation-delay: 2.8s; width: 60px; height: 60px; } /* Window */
 
 @keyframes float {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(10deg); }
-    100% { transform: translateY(0) rotate(0deg); }
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(15px, -25px) rotate(8deg); }
+    50% { transform: translate(-10px, 15px) rotate(-5deg); }
+    75% { transform: translate(-20px, -10px) rotate(5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 .code-badge {
@@ -178,11 +180,14 @@ strong {
 }
 
 .hero .subtitle {
-    font-size: 1.3rem;
-    color: var(--text-muted);
-    font-weight: 400;
-    max-width: 700px;
+    font-size: 1.5rem;
+    color: var(--text-main);
+    font-weight: 600;
+    max-width: 850px;
     margin: 0 auto;
+    line-height: 1.6;
+    letter-spacing: -0.3px;
+    text-shadow: 0 4px 15px rgba(255, 255, 255, 0.8);
 }
 
 /* Sections */
