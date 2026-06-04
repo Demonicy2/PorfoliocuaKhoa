@@ -819,7 +819,17 @@ footer {
 
 /* Main Content Adjustments for Desktop Sidebar */
 body {
-    /* padding-left: 260px; Removed for off-canvas layout */
+    transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.sidebar-open {
+    padding-left: 260px;
+}
+
+@media (max-width: 992px) {
+    body.sidebar-open {
+        padding-left: 0;
+    }
 }
 
 /* Mobile Nav Bar */

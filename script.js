@@ -35,10 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (hamburger && sidebar && menuClose) {
         hamburger.addEventListener('click', () => {
             sidebar.classList.add('active');
+            document.body.classList.add('sidebar-open');
         });
 
         menuClose.addEventListener('click', () => {
             sidebar.classList.remove('active');
+            document.body.classList.remove('sidebar-open');
         });
     }
 
@@ -83,9 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             
-            // Close sidebar on mobile
-            if (window.innerWidth <= 992 && sidebar) {
+            // Close sidebar after clicking a link
+            if (sidebar) {
                 sidebar.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
             }
         });
     });
