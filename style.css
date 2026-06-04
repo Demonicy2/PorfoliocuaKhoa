@@ -512,6 +512,37 @@ section h2 .section-num {
     padding: 0 35px 35px;
 }
 
+/* Split Screen Layout for Accordion */
+.content-inner.split-screen {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+    opacity: 0;
+}
+
+.accordion-header.active + .accordion-content .content-inner.split-screen {
+    animation: fadeInContent 0.8s ease forwards;
+    animation-delay: 0.1s;
+}
+
+@keyframes fadeInContent {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.split-left {
+    background: #fdfdfd;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.split-right {
+    padding: 15px 0;
+}
+
 .content-inner h4 {
     color: var(--accent-color);
     margin: 25px 0 10px;
@@ -612,6 +643,9 @@ footer {
         max-width: 400px;
         margin: 0 auto;
         width: 100%;
+    }
+    .content-inner.split-screen {
+        grid-template-columns: 1fr;
     }
 }
 
