@@ -62,18 +62,26 @@ document.addEventListener("DOMContentLoaded", () => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetIndex = link.getAttribute('data-target');
-            const duAnSection = document.getElementById('du-an');
+            // Find the target accordion header
+            const targetHeader = accordionHeaders[targetIndex];
             
-            // Smooth scroll to section
-            duAnSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            
-            // Wait for scroll and open accordion
-            setTimeout(() => {
-                const header = accordionHeaders[targetIndex];
-                if (header && !header.classList.contains('active')) {
-                    header.click();
+            if (targetHeader) {
+                // Calculate position with offset for top-nav
+                const headerOffset = 80; // height of top-nav + some padding
+                const elementPosition = targetHeader.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                // Smooth scroll to the specific item
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Open accordion if not already open
+                if (!targetHeader.classList.contains('active')) {
+                    targetHeader.click();
                 }
-            }, 600);
+            }
             
             // Close sidebar on mobile
             if (window.innerWidth <= 992 && sidebar) {
