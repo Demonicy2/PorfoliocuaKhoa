@@ -1026,16 +1026,31 @@ body.sidebar-open .container {
 /* Remove old mobile overrides since default is now off-canvas */
 
 /* Theme Toggle */
-.theme-toggle {
+.theme-toggle-wrapper {
     position: fixed;
     top: 30px;
     right: 40px;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.theme-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    transition: color 0.4s ease;
+    user-select: none;
+}
+
+.theme-toggle {
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
     outline: none;
+    display: flex;
 }
 
 .toggle-track {
@@ -1086,6 +1101,7 @@ body.sidebar-open .container {
     background: #ffdf00;
     box-shadow: 0 0 10px rgba(255, 223, 0, 0.8), inset -2px -2px 0 rgba(200, 150, 0, 0.2);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2; /* Fixes blurriness from clouds overlay */
 }
 
 [data-theme="dark"] .toggle-sun-moon {
@@ -1096,9 +1112,12 @@ body.sidebar-open .container {
 }
 
 @media (max-width: 992px) {
-    .theme-toggle {
+    .theme-toggle-wrapper {
         top: 15px;
         right: 20px;
+    }
+    .theme-label {
+        display: none; /* Hide label on mobile to save space */
     }
 }
 

@@ -97,12 +97,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // 5. Theme Toggle Logic (Dark/Light Mode)
     // -----------------------------------------------------
     const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeLabel = document.getElementById('theme-label');
     const rootElement = document.documentElement; // <html> tag
     
     // Check local storage for theme preference
     const savedTheme = localStorage.getItem('portfolio-theme');
     if (savedTheme === 'dark') {
         rootElement.setAttribute('data-theme', 'dark');
+        if (themeLabel) themeLabel.textContent = 'Chế độ Tối';
+    } else {
+        if (themeLabel) themeLabel.textContent = 'Chế độ Sáng';
     }
     
     if (themeToggleBtn) {
@@ -110,9 +114,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (rootElement.getAttribute('data-theme') === 'dark') {
                 rootElement.removeAttribute('data-theme');
                 localStorage.setItem('portfolio-theme', 'light');
+                if (themeLabel) themeLabel.textContent = 'Chế độ Sáng';
             } else {
                 rootElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('portfolio-theme', 'dark');
+                if (themeLabel) themeLabel.textContent = 'Chế độ Tối';
             }
         });
     }
