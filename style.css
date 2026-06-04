@@ -255,8 +255,13 @@ section h2 .section-num {
     overflow: hidden;
 }
 
+.social-links a svg {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .social-links a:hover svg {
     color: var(--primary-color);
+    transform: scale(1.2) translateY(-3px);
 }
 
 .profile-sidebar::before {
@@ -502,8 +507,13 @@ section h2 .section-num {
 }
 
 .accordion-header .icon {
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     color: var(--accent-light);
+}
+
+.accordion-header:hover .icon {
+    color: var(--accent-color);
+    transform: scale(1.1);
 }
 
 .accordion-header.active .icon {
@@ -588,7 +598,7 @@ section h2 .section-num {
 /* Summary Cards */
 .summary-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
 
@@ -669,6 +679,10 @@ footer {
     }
     .content-inner { padding: 0 25px 25px; }
     .avatar-glow { width: 160px; height: 160px; }
+    
+    .summary-content {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Mobile PDF Fallback */
@@ -772,10 +786,20 @@ footer {
     transition: all 0.3s ease;
 }
 
+.sidebar-links a svg {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-muted);
+}
+
 .sidebar-links a:hover, .sidebar-links a.active {
     background-color: #fff;
     color: var(--primary-color);
     box-shadow: var(--shadow-sm);
+}
+
+.sidebar-links a:hover svg, .sidebar-links a.active svg {
+    color: var(--accent-color);
+    transform: scale(1.15);
 }
 
 .has-submenu {
