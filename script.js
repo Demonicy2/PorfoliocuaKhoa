@@ -68,21 +68,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const targetHeader = accordionHeaders[targetIndex];
             
             if (targetHeader) {
-                // Calculate position with offset for top-nav
-                const headerOffset = 80; // height of top-nav + some padding
-                const elementPosition = targetHeader.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                // Smooth scroll to the specific item
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Open accordion if not already open
+                // Open accordion if not already open (do this first to trigger layout changes)
                 if (!targetHeader.classList.contains('active')) {
                     targetHeader.click();
                 }
+                
+                // Wait slightly for the accordion to close others and open this one, 
+                // preventing blurry iframe rendering during concurrent scroll + CSS animation.
+                setTimeout(() => {
+                    const headerOffset = 80; 
+                    const elementPosition = targetHeader.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 150);
             }
             
             // Close sidebar only on mobile (desktop keeps it open)
