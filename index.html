@@ -152,6 +152,13 @@
             border: 1px solid rgba(157,93,255,0.2);
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
+        .tech-bubble {
+            transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .tech-bubble:hover {
+            filter: brightness(1.2) drop-shadow(0 0 15px currentColor);
+            cursor: pointer;
+        }
         .tech-bubble svg { width: 32px; height: 32px; }
         .bubble-pink  { color: #ec4899; }
         .bubble-orange { color: #f97316; }
@@ -289,10 +296,14 @@
             opacity: 0;
             transition: opacity 0.2s;
         }
-        .btn-enter:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(139,61,255,0.5); }
+        .btn-enter:hover { 
+            transform: translateY(-5px) scale(1.05); 
+            box-shadow: 0 10px 30px rgba(139,61,255,0.6); 
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+        }
         .btn-enter:hover::before { opacity: 1; }
-        .btn-enter svg { transition: transform 0.2s; }
-        .btn-enter:hover svg { transform: translateX(4px); }
+        .btn-enter svg { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-enter:hover svg { transform: translateX(6px) scale(1.1); }
 
         /* ── Divider line ── */
         .divider-line {

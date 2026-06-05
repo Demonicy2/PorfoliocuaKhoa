@@ -327,8 +327,9 @@ section h2 .section-num {
 }
 
 .social-links a:hover svg {
-    color: var(--primary-color);
-    transform: scale(1.2) translateY(-3px);
+    color: var(--accent-color);
+    transform: scale(1.3) translateY(-5px) rotate(8deg);
+    filter: drop-shadow(0 4px 8px rgba(255, 140, 0, 0.4));
 }
 
 .profile-sidebar::before {
@@ -432,9 +433,16 @@ section h2 .section-num {
 }
 
 .info-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(139, 61, 255, 0.1);
-    border-color: rgba(139, 61, 255, 0.3);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(139, 61, 255, 0.25);
+    border-color: var(--primary-color);
+}
+.info-item h3 svg {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
+}
+.info-item:hover h3 svg {
+    transform: rotate(15deg) scale(1.2);
+    color: var(--accent-color);
 }
 
 .info-item h3 {
@@ -574,8 +582,9 @@ section h2 .section-num {
 }
 
 .accordion-header:hover {
-    background: linear-gradient(90deg, rgba(139, 61, 255, 0.05) 0%, rgba(255,255,255,0) 100%);
-    color: var(--primary-color);
+    background: linear-gradient(90deg, rgba(139, 61, 255, 0.08) 0%, rgba(255,255,255,0) 100%);
+    color: var(--accent-color);
+    padding-left: 38px;
 }
 
 .accordion-header.active {
@@ -596,8 +605,9 @@ section h2 .section-num {
 
 .accordion-header:hover .icon {
     color: #fff;
-    background: var(--primary-color);
-    transform: scale(1.1);
+    background: var(--accent-color);
+    transform: scale(1.2) rotate(90deg);
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.4);
 }
 
 .accordion-header.active .icon {
@@ -714,8 +724,13 @@ section h2 .section-num {
 }
 
 .summary-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255, 140, 0, 0.2);
+    border-color: var(--accent-color);
+}
+.summary-card:hover h4 {
+    color: var(--primary-color);
+    transform: translateX(8px);
 }
 
 .summary-card h4 {
@@ -723,6 +738,7 @@ section h2 .section-num {
     margin-bottom: 15px;
     font-size: 1.35rem;
     font-weight: 800;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
 }
 
 .summary-card p {
