@@ -1,14 +1,318 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hồ Sơ Kỹ Năng Số | Nhập môn Công nghệ</title>
+    <title>Chào mừng | Khoa's Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-color: #8b3dff;
+            --primary-hover: #6a1b9a;
+            --accent-color: #ff8c00;
+            --accent-light: #ffb74d;
+            --bg-main: #f9f5ff;
+            --bg-card: #ffffff;
+            --card-border: #ebdfff;
+            --text-main: #2d1b4e;
+            --text-muted: #6b5c82;
+            --shadow-sm: 0 4px 20px rgba(139,61,255,0.08);
+            --shadow-md: 0 12px 35px rgba(139,61,255,0.15);
+            --glass-bg: rgba(255,255,255,0.85);
+            --glass-border: rgba(255,255,255,0.6);
+        }
+        [data-theme="dark"] {
+            --primary-color: #9d5dff;
+            --primary-hover: #7b2cbf;
+            --accent-color: #ffa726;
+            --accent-light: #ffcc80;
+            --bg-main: #0f0a1f;
+            --bg-card: #1a103c;
+            --card-border: #3b28cc;
+            --text-main: #f8f8f2;
+            --text-muted: #a39eb8;
+            --shadow-sm: 0 4px 20px rgba(0,0,0,0.4);
+            --shadow-md: 0 12px 35px rgba(0,0,0,0.6);
+            --glass-bg: rgba(26,16,60,0.85);
+            --glass-border: rgba(255,255,255,0.05);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { font-size: 17px; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(228,207,255,0.6), transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(255,238,173,0.6), transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(179,238,226,0.6), transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(200,240,255,0.6), transparent 50%),
+                radial-gradient(circle at 50% 10%, rgba(255,204,213,0.6), transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        [data-theme="dark"] body {
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(139,61,255,0.15), transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(255,140,0,0.15), transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0,191,255,0.15), transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(59,130,246,0.15), transparent 50%),
+                radial-gradient(circle at 50% 10%, rgba(236,72,153,0.15), transparent 50%);
+        }
+
+        /* ── Theme toggle (copied exactly) ── */
+        .theme-toggle-wrapper {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .theme-label {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            transition: color 0.4s ease;
+            user-select: none;
+        }
+        .theme-toggle { background: none; border: none; cursor: pointer; padding: 0; outline: none; display: flex; }
+        .toggle-track {
+            width: 64px; height: 32px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #ffb74d, #ff8c00);
+            position: relative;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.1), 0 4px 12px rgba(255,140,0,0.3);
+            transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+            overflow: hidden;
+        }
+        .toggle-track::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 35%;
+            width: 30px; height: 30px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translateY(-50%);
+            box-shadow: 15px -5px 0 5px rgba(255,255,255,0.1);
+            transition: all 0.5s ease;
+        }
+        [data-theme="dark"] .toggle-track {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.5);
+        }
+        [data-theme="dark"] .toggle-track::before {
+            width: 2px; height: 2px;
+            background: white;
+            box-shadow: 10px 5px 0 0 white, 25px -5px 0 1px white, 35px 10px 0 0 white, 15px -10px 0 0 white;
+            border-radius: 50%;
+            transform: translateY(-50%) scale(0.8);
+        }
+        .toggle-sun-moon {
+            position: absolute;
+            top: 4px; left: 4px;
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            background: #ffdf00;
+            box-shadow: 0 0 10px rgba(255,223,0,0.8), inset -2px -2px 0 rgba(200,150,0,0.2);
+            transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+            z-index: 2;
+        }
+        [data-theme="dark"] .toggle-sun-moon {
+            left: calc(100% - 28px);
+            background: transparent;
+            box-shadow: inset -6px -4px 0 #cbd5e1, 0 0 15px rgba(255,255,255,0.3);
+            transform: rotate(15deg);
+        }
+
+        /* ── Floating bubbles (exact copy from main site) ── */
+        .tech-bubble {
+            position: fixed;
+            width: 65px; height: 65px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            animation: float 6s infinite ease-in-out;
+            z-index: 0;
+        }
+        [data-theme="dark"] .tech-bubble {
+            background: rgba(26,16,60,0.7);
+            border: 1px solid rgba(157,93,255,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .tech-bubble svg { width: 32px; height: 32px; }
+        .bubble-pink  { color: #ec4899; }
+        .bubble-orange { color: #f97316; }
+        .bubble-blue  { color: #3b82f6; }
+        .bubble-green { color: #10b981; }
+        .bubble-purple { color: #8b5cf6; }
+        .bubble-1 { top:10%; left:18%; animation-delay:0s;   width:60px;height:60px; }
+        .bubble-2 { top:20%; right:20%; animation-delay:1.2s; width:70px;height:70px; }
+        .bubble-3 { top:60%; left:12%; animation-delay:2.4s; width:75px;height:75px; }
+        .bubble-4 { top:75%; right:15%; animation-delay:3.6s; width:65px;height:65px; }
+        .bubble-5 { top:30%; right:32%; animation-delay:1.5s; width:90px;height:90px; background:rgba(255,255,255,0.7); backdrop-filter:blur(12px); }
+        .bubble-5 svg { width:45px; height:45px; }
+        .bubble-6 { top:85%; left:55%; animation-delay:2.8s; width:60px;height:60px; }
+        [data-theme="dark"] .bubble-5 { background:rgba(26,16,60,0.8); }
+
+        @keyframes float {
+            0%   { transform: translate(0,0) rotate(0deg); }
+            25%  { transform: translate(15px,-25px) rotate(8deg); }
+            50%  { transform: translate(-10px,15px) rotate(-5deg); }
+            75%  { transform: translate(-20px,-10px) rotate(5deg); }
+            100% { transform: translate(0,0) rotate(0deg); }
+        }
+
+        /* ── Main layout ── */
+        .welcome-stage {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            gap: 0;
+        }
+
+        /* ── Badge (matches .code-badge) ── */
+        .code-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: #fff;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 28px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(139,61,255,0.3);
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards 0.2s;
+        }
+
+        /* ── Heading ── */
+        .welcome-h1 {
+            font-size: clamp(2.4rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards 0.45s;
+        }
+        .welcome-h1 .name-line {
+            background: linear-gradient(90deg, #3b28cc, #8b3dff, #1ca5db, #3b28cc);
+            background-size: 300% 100%;
+            animation: gradientShift 6s ease-in-out infinite, fadeUp 0.6s ease forwards 0.45s;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+        .welcome-h1 .hello-line {
+            display: block;
+            color: var(--text-main);
+        }
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ── Subtitle ── */
+        .welcome-sub {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            max-width: 520px;
+            line-height: 1.65;
+            margin-bottom: 36px;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards 0.65s;
+        }
+        .welcome-sub strong { color: var(--primary-color); font-weight: 700; }
+
+        /* ── CTA button ── */
+        .btn-enter {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(139,61,255,0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards 0.85s;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-enter::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .btn-enter:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(139,61,255,0.5); }
+        .btn-enter:hover::before { opacity: 1; }
+        .btn-enter svg { transition: transform 0.2s; }
+        .btn-enter:hover svg { transform: translateX(4px); }
+
+        /* ── Divider line ── */
+        .divider-line {
+            width: 60px; height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 3px;
+            margin: 0 auto 32px;
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards 0.56s;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(20px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+
+        @media (max-width: 992px) {
+            .theme-toggle-wrapper { top:15px; right:20px; }
+            .theme-label { display: none; }
+            .bubble-3,.bubble-5,.bubble-6 { display: none; }
+        }
+        @media (max-width: 600px) {
+            .bubble-1,.bubble-2,.bubble-4 { display: none; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Theme Toggle Button -->
+
+    <!-- Theme Toggle (identical to main site) -->
     <div class="theme-toggle-wrapper">
         <span class="theme-label" id="theme-label">Chế độ Sáng</span>
         <button class="theme-toggle" id="theme-toggle" aria-label="Chuyển đổi chế độ Sáng/Tối">
@@ -17,400 +321,75 @@
             </div>
         </button>
     </div>
-    
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h3 style="color: var(--primary-color); margin: 0; font-size: 1.5rem; font-weight: 800;">Khoa<span style="color: var(--accent-color);">.</span></h3>
-            <button class="menu-close" id="menu-close">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-        </div>
-        <ul class="sidebar-links">
-            <li><a href="#gioi-thieu">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                Giới thiệu
-            </a></li>
-            <li class="has-submenu">
-                <a href="#du-an" id="du-an-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                    Dự án 
-                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </a>
-                <ul class="submenu">
-                    <li><a href="#du-an" class="submenu-link" data-target="0">Bài 1: Thao tác tệp tin</a></li>
-                    <li><a href="#du-an" class="submenu-link" data-target="1">Bài 2: Tìm kiếm TT</a></li>
-                    <li><a href="#du-an" class="submenu-link" data-target="2">Bài 3: Viết Prompt</a></li>
-                    <li><a href="#du-an" class="submenu-link" data-target="3">Bài 4: Hợp tác nhóm</a></li>
-                    <li><a href="#du-an" class="submenu-link" data-target="4">Bài 5: AI tạo sinh</a></li>
-                    <li><a href="#du-an" class="submenu-link" data-target="5">Bài 6: AI có trách nhiệm</a></li>
-                </ul>
-            </li>
-            <li><a href="#tong-ket">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                Tổng kết
-            </a></li>
-        </ul>
-    </aside>
 
-    <!-- Top Navigation Bar (Mobile Header) -->
-    <nav class="top-nav-mobile">
-        <button class="hamburger" id="hamburger">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        </button>
-        <div class="mobile-logo">Khoa's Portfolio</div>
-    </nav>
-    <header class="hero">
-        <!-- Animated Tech Bubbles -->
-        <div class="tech-bubble bubble-pink bubble-1">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-        </div>
-        <div class="tech-bubble bubble-orange bubble-2">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-            </svg>
-        </div>
-        <div class="tech-bubble bubble-blue bubble-3">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                <rect x="9" y="9" width="6" height="6"></rect>
-                <line x1="9" y1="1" x2="9" y2="4"></line>
-                <line x1="15" y1="1" x2="15" y2="4"></line>
-                <line x1="9" y1="20" x2="9" y2="23"></line>
-                <line x1="15" y1="20" x2="15" y2="23"></line>
-                <line x1="20" y1="9" x2="23" y2="9"></line>
-                <line x1="20" y1="14" x2="23" y2="14"></line>
-                <line x1="1" y1="9" x2="4" y2="9"></line>
-                <line x1="1" y1="14" x2="4" y2="14"></line>
-            </svg>
-        </div>
-        <div class="tech-bubble bubble-green bubble-4">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
-                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
-                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
-                <line x1="12" y1="20" x2="12.01" y2="20"></line>
-            </svg>
-        </div>
-        <div class="tech-bubble bubble-purple bubble-5">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                <polyline points="2 17 12 22 22 17"></polyline>
-                <polyline points="2 12 12 17 22 12"></polyline>
-            </svg>
-        </div>
-        <div class="tech-bubble bubble-blue bubble-6">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="3" y1="9" x2="21" y2="9"></line>
-                <line x1="9" y1="21" x2="9" y2="9"></line>
-            </svg>
-        </div>
-        <div class="container">
-            <div class="code-badge">Hồ Sơ Của Tôi</div>
-            <h1>Digital Portfolio</h1>
-            <p class="subtitle">Dự án cuối kỳ môn Nhập môn Công nghệ số & Ứng dụng Trí tuệ nhân tạo</p>
-        </div>
-    </header>
+    <!-- Floating Bubbles (same as main site) -->
+    <div class="tech-bubble bubble-pink bubble-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+    </div>
+    <div class="tech-bubble bubble-orange bubble-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    </div>
+    <div class="tech-bubble bubble-blue bubble-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+    </div>
+    <div class="tech-bubble bubble-green bubble-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+    </div>
+    <div class="tech-bubble bubble-purple bubble-5">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+    </div>
+    <div class="tech-bubble bubble-blue bubble-6">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+    </div>
 
-    <main class="container">
-        <!-- Trang Giới thiệu -->
-        <section id="gioi-thieu" class="section glass-panel">
-            <h2><span class="section-num">01.</span> Giới thiệu bản thân</h2>
-            
-            <div class="profile-wrapper">
-                <div class="left-column">
-                    <div class="profile-sidebar">
-                        <div class="avatar-glow">
-                            <img src="avatar.png" alt="Ảnh cá nhân" class="avatar-img" id="user-avatar">
-                        </div>
-                        <div class="tech-badge">
-                            Sinh viên IT
-                        </div>
-                        <div class="profile-extra">
-                            <p class="location">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                Hải Phòng
-                            </p>
-                            <div class="divider"></div>
-                            <p class="quote">"Học hỏi không ngừng, sáng tạo không giới hạn."</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Decorative Connect Card -->
-                    <div class="info-item connect-card" style="text-align: center; padding: 25px;">
-                        <h4 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem; font-weight: 800;">Kết nối với mình</h4>
-                        <div class="social-links" style="display: flex; justify-content: center; gap: 20px;">
-                            <a href="#" style="color: var(--text-muted); transition: color 0.3s;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
-                            <a href="#" style="color: var(--text-muted); transition: color 0.3s;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                            <a href="#" style="color: var(--text-muted); transition: color 0.3s;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
-                        </div>
-                    </div>
+    <!-- Welcome Content -->
+    <div class="welcome-stage">
+        <div class="code-badge">Hồ Sơ Của Tôi</div>
 
-                    <!-- Decorative illustration to fill space -->
-                    <div class="decorative-art" style="text-align: center; margin-top: -10px; opacity: 0.6;">
-                        <svg width="150" height="120" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M100 150 Q90 80 40 40" stroke="var(--primary-color)" stroke-width="3" fill="none" stroke-linecap="round"/>
-                            <path d="M100 150 Q110 90 160 50" stroke="var(--primary-color)" stroke-width="3" fill="none" stroke-linecap="round"/>
-                            <path d="M100 150 Q105 50 100 10" stroke="var(--primary-color)" stroke-width="3" fill="none" stroke-linecap="round"/>
-                            <circle cx="40" cy="40" r="8" fill="var(--accent-light)"/>
-                            <circle cx="160" cy="50" r="6" fill="var(--accent-light)"/>
-                            <circle cx="100" cy="10" r="10" fill="var(--primary-hover)"/>
-                            <circle cx="70" cy="70" r="5" fill="var(--primary-hover)"/>
-                            <circle cx="120" cy="80" r="7" fill="var(--primary-hover)"/>
-                        </svg>
-                    </div>
-                </div>
-                
-                <div class="info-grid custom-grid">
-                    <div class="info-item personal-info tint-blue">
-                        <h3>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                            Thông tin cá nhân
-                        </h3>
-                        <ul class="tech-list">
-                            <li><strong>Họ và tên:</strong> Lê Huy Khoa</li>
-                            <li><strong>Ngành học:</strong> Công nghệ thông tin (Trường Đại học Công nghệ, Đại học Quốc gia Hà Nội - UET - VNU)</li>
-                            <li><strong>Sở thích:</strong> Phát triển phần mềm, Ứng dụng Trí tuệ nhân tạo, Khám phá công nghệ mới</li>
-                        </ul>
-                        <div class="tech-skills">
-                            <span class="skill-tag">Phát triển phần mềm</span>
-                            <span class="skill-tag">Trí tuệ nhân tạo</span>
-                            <span class="skill-tag">Prompt Engineering</span>
-                            <span class="skill-tag">Công nghệ mới</span>
-                        </div>
-                    </div>
-                    <div class="info-item tint-orange">
-                        <h3>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
-                            Định hướng Phát triển
-                        </h3>
-                        <p>Định hướng của mình là liên tục rèn luyện và nâng cao trình độ chuyên môn để trở thành một <strong>kỹ sư phần mềm</strong> toàn diện. Mình khao khát được tạo ra những sản phẩm số có giá trị thực tiễn, đặc biệt là các phần mềm kết hợp AI để giải quyết các bài toán trong đời sống.</p>
-                    </div>
-                    <div class="info-item tint-green">
-                        <h3>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-                            Ý nghĩa của Portfolio
-                        </h3>
-                        <ul class="tech-list">
-                            <li>Đúc kết và hệ thống hóa lại toàn bộ những kỹ năng cốt lõi đã tích lũy qua học phần "Nhập môn Công nghệ số & Ứng dụng Trí tuệ nhân tạo".</li>
-                            <li>Xây dựng một hồ sơ năng lực trực tuyến chuyên nghiệp nhằm phục vụ cho công việc và học tập ở các giai đoạn sau.</li>
-                            <li>Liên kết các bài tập thực hành đơn lẻ thành một dự án tổng thể và thống nhất.</li>
-                            <li>Lưu giữ và chia sẻ hành trình trải nghiệm qua 6 nhiệm vụ lớn nhỏ trong suốt khóa học.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <h1 class="welcome-h1">
+            <span class="hello-line">Xin chào, mình là</span>
+            <span class="name-line">Lê Huy Khoa.</span>
+        </h1>
 
-        <!-- Trang Dự án -->
-        <section id="du-an" class="section glass-panel">
-            <h2><span class="section-num">02.</span> Dự án & Bài tập</h2>
-            <p class="section-desc">Tập hợp các bài tập và dự án thực hành trong suốt khóa học. <strong>(Nhấn vào từng bài tập để xem chi tiết)</strong></p>
-            
-            <div class="accordion">
-                <!-- Bài tập 1 -->
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        Bài tập 1: Thao tác cơ bản với tệp tin và thư mục
-                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="content-inner split-screen">
-                            <div class="split-left">
-                                <div class="pdf-container">
-                                <div class="mobile-pdf-fallback">
-                                    <a href="Bai1_ThaoTacCoBan.pdf" target="_blank" class="btn-download">📄 Nhấn vào đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
-                                </div>
-                                <iframe src="Bai1_ThaoTacCoBan.pdf#view=FitH" width="100%" height="600px" style="border: none;"></iframe>
-                            </div>
-                            </div>
-                            <div class="split-right">
-                                <div class="project-info">
-                                    <h4>Mục tiêu:</h4>
-                            <p>Hiểu và thực hành quản lý tệp tin hiệu quả. Trình bày cấu trúc thư mục tối ưu và tuân thủ các quy tắc đặt tên tệp rõ ràng, khoa học.</p>
-                            <h4>Tóm tắt quá trình thực hiện:</h4>
-                            <p>Tiến hành thiết lập một cấu trúc cây thư mục logic phục vụ cho việc học tập nhiều môn học khác nhau. Áp dụng các quy tắc đặt tên tệp thống nhất (ví dụ: TenMon_BaiTap_HoTen) và chụp ảnh minh họa lại quá trình này.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="divider-line"></div>
 
-                <!-- Bài tập 2 -->
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        Bài tập 2: Tìm kiếm và đánh giá thông tin học thuật
-                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="content-inner split-screen">
-                            <div class="split-left">
-                                <div class="pdf-container">
-                                <div class="mobile-pdf-fallback">
-                                    <a href="Bai2_TimKiemThongTin.pdf" target="_blank" class="btn-download">📄 Nhấn vào đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
-                                </div>
-                                <iframe src="Bai2_TimKiemThongTin.pdf#view=FitH" width="100%" height="600px" style="border: none;"></iframe>
-                            </div>
-                            </div>
-                            <div class="split-right">
-                                <div class="project-info">
-                                    <h4>Mục tiêu:</h4>
-                            <p>Thành thạo sử dụng các toán tử tìm kiếm nâng cao để tra cứu tài liệu học thuật và biết cách đánh giá độ tin cậy của các nguồn thông tin.</p>
-                            <h4>Tóm tắt quá trình thực hiện:</h4>
-                            <p>Sử dụng các nền tảng như Google Scholar, kết hợp các toán tử (AND, OR, ngoặc kép "", site:) để lọc kết quả. Sau đó, lập bảng phân tích, đánh giá các nguồn thông tin thu thập được dựa trên tính chính xác, tính khách quan và độ uy tín.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <p class="welcome-sub">
+            Sinh viên <strong>Công nghệ thông tin – UET VNU</strong>.<br>
+            Đây là Digital Portfolio cuối kỳ môn Nhập môn Công nghệ số &amp; Ứng dụng Trí tuệ nhân tạo.
+        </p>
 
-                <!-- Bài tập 3 -->
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        Bài tập 3: Viết Prompt hiệu quả cho các tác vụ học tập
-                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="content-inner split-screen">
-                            <div class="split-left">
-                                <div class="pdf-container">
-                                <div class="mobile-pdf-fallback">
-                                    <a href="Bai3_VietPrompt.pdf" target="_blank" class="btn-download">📄 Nhấn vào đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
-                                </div>
-                                <iframe src="Bai3_VietPrompt.pdf#view=FitH" width="100%" height="600px" style="border: none;"></iframe>
-                            </div>
-                            </div>
-                            <div class="split-right">
-                                <div class="project-info">
-                                    <h4>Mục tiêu:</h4>
-                            <p>Tương tác hiệu quả với các công cụ Trí tuệ nhân tạo (Generative AI) bằng cách viết lời nhắc (Prompt) tối ưu, rõ ràng và có đầy đủ ngữ cảnh.</p>
-                            <h4>Tóm tắt quá trình thực hiện:</h4>
-                            <p>Thực hiện so sánh kết quả sinh ra giữa một prompt cơ bản (ngắn gọn, thiếu ngữ cảnh) và một prompt đã được cải tiến (áp dụng các nguyên tắc đóng vai, nêu rõ yêu cầu, định dạng đầu ra). Phân tích sự vượt trội về chất lượng câu trả lời từ AI.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <a href="portfolio.html" class="btn-enter">
+            Vào Portfolio
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+    </div>
 
-                <!-- Bài tập 4 -->
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        Bài tập 4: Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm
-                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="content-inner split-screen">
-                            <div class="split-left">
-                                <div class="pdf-container">
-                                <div class="mobile-pdf-fallback">
-                                    <a href="Bai4_HopTacTrucTuyen.pdf" target="_blank" class="btn-download">📄 Nhấn vào đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
-                                </div>
-                                <iframe src="Bai4_HopTacTrucTuyen.pdf#view=FitH" width="100%" height="600px" style="border: none;"></iframe>
-                            </div>
-                            </div>
-                            <div class="split-right">
-                                <div class="project-info">
-                                    <h4>Mục tiêu:</h4>
-                            <p>Áp dụng thành thạo các công cụ làm việc nhóm trực tuyến để quản lý tiến độ, chia sẻ tài nguyên và duy trì giao tiếp hiệu quả trong dự án.</p>
-                            <h4>Tóm tắt quá trình thực hiện:</h4>
-                            <p>Khởi tạo không gian làm việc trên công cụ quản lý dự án, tiến hành phân công nhiệm vụ rõ ràng cho từng thành viên. Sử dụng Google Docs/Drive để chỉnh sửa tài liệu đồng thời, phối hợp trực tuyến và lưu lại các minh chứng làm việc nhóm.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <script>
+        // ── Theme toggle (same logic as main site) ──
+        const html = document.documentElement;
+        const btn  = document.getElementById('theme-toggle');
+        const lbl  = document.getElementById('theme-label');
 
-                <!-- Bài tập 5 -->
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        Bài tập 5: Sử dụng AI tạo sinh hỗ trợ sáng tạo nội dung
-                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="content-inner split-screen">
-                            <div class="split-left">
-                                <div class="pdf-container">
-                                <div class="mobile-pdf-fallback">
-                                    <a href="Bai5_SangTaoNoiDungAI.pdf" target="_blank" class="btn-download">📄 Nhấn vào đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
-                                </div>
-                                <iframe src="Bai5_SangTaoNoiDungAI.pdf#view=FitH" width="100%" height="600px" style="border: none;"></iframe>
-                            </div>
-                            </div>
-                            <div class="split-right">
-                                <div class="project-info">
-                                    <h4>Mục tiêu:</h4>
-                            <p>Khai thác tiềm năng của AI tạo sinh (sinh văn bản, hình ảnh) để tối ưu hóa và hỗ trợ quá trình sáng tạo nội dung số phong phú.</p>
-                            <h4>Tóm tắt quá trình thực hiện:</h4>
-                            <p>Sử dụng AI để gợi ý ý tưởng, phác thảo cấu trúc bài viết và hỗ trợ tạo ra các thành phần nội dung số (ví dụ: hình ảnh minh họa). Sau đó, tiến hành chỉnh sửa, biên tập lại để tạo ra sản phẩm hoàn thiện mang dấu ấn cá nhân.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        // Sync with saved preference
+        const saved = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', saved);
+        lbl.textContent = saved === 'dark' ? 'Chế độ Tối' : 'Chế độ Sáng';
 
-                <!-- Bài tập 6 -->
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        Bài tập 6: Sử dụng AI có trách nhiệm trong học tập và nghiên cứu
-                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="content-inner split-screen">
-                            <div class="split-left">
-                                <div class="pdf-container">
-                                <div class="mobile-pdf-fallback">
-                                    <a href="Bai6_AITrachNhiem.pdf" target="_blank" class="btn-download">📄 Nhấn vào đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
-                                </div>
-                                <iframe src="Bai6_AITrachNhiem.pdf#view=FitH" width="100%" height="600px" style="border: none;"></iframe>
-                            </div>
-                            </div>
-                            <div class="split-right">
-                                <div class="project-info">
-                                    <h4>Mục tiêu:</h4>
-                            <p>Nhận thức sâu sắc về các vấn đề đạo đức, liêm chính học thuật khi ứng dụng AI và xây dựng được bộ nguyên tắc cá nhân trong việc sử dụng.</p>
-                            <h4>Tóm tắt quá trình thực hiện:</h4>
-                            <p>Nghiên cứu các rủi ro tiềm ẩn như đạo văn, thiên kiến thuật toán, thông tin sai lệch. Từ đó, xây dựng một bản tuyên ngôn/bộ nguyên tắc cá nhân cam kết về việc sử dụng AI một cách minh bạch, có trách nhiệm và tôn trọng bản quyền.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        btn.addEventListener('click', () => {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            const next   = isDark ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            lbl.textContent = next === 'dark' ? 'Chế độ Tối' : 'Chế độ Sáng';
+            localStorage.setItem('theme', next);
+        });
 
-            </div>
-        </section>
-
-        <!-- Trang Tổng kết -->
-        <section id="tong-ket" class="section glass-panel">
-            <h2><span class="section-num">03.</span> Tổng kết</h2>
-            <div class="summary-content">
-                <div class="summary-card">
-                    <h4>Trải nghiệm và Cảm nhận cá nhân</h4>
-                    <p>Quá trình xây dựng Portfolio và thực hiện các bài tập thực sự là một hành trình thú vị. Nó không chỉ giúp tôi hệ thống hóa lại toàn bộ kiến thức đã học mà còn tạo ra một sản phẩm thực tế để tự nhìn nhận lại sự phát triển kỹ năng số của chính mình.</p>
-                </div>
-                <div class="summary-card">
-                    <h4>Kiến thức và Kỹ năng quan trọng nhất</h4>
-                    <p>Tôi đánh giá cao nhất kỹ năng <strong>Viết Prompt (Prompt Engineering)</strong> và kỹ năng <strong>Đánh giá thông tin học thuật</strong>. Đây là hai công cụ cốt lõi giúp tôi khai thác tri thức trong thời đại số một cách nhanh chóng nhưng vẫn đảm bảo sự chính xác và tin cậy.</p>
-                </div>
-                <div class="summary-card">
-                    <h4>Điểm tâm đắc và Thách thức</h4>
-                    <p><strong>Tâm đắc:</strong> Khám phá ra rằng AI là một trợ thủ vô cùng đắc lực, giúp tiết kiệm thời gian đáng kể nếu ta biết cách kiểm soát và sử dụng nó một cách có trách nhiệm.<br><br>
-                    <strong>Thách thức:</strong> Thử thách lớn nhất là việc biên tập lại nội dung của 6 bài tập sao cho súc tích, dễ hiểu và trình bày trên Portfolio một cách chuyên nghiệp, đẹp mắt nhất. Tuy nhiên, thách thức này đã giúp tôi cải thiện đáng kể tư duy thiết kế và tổng hợp thông tin.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>© 2026 Digital Portfolio. Lê Huy Khoa - Sinh viên K70 UET.</p>
-    </footer>
-
-    <script src="script.js"></script>
+        // Fade out on navigate
+        document.querySelector('.btn-enter').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.style.transition = 'opacity 0.4s';
+            document.body.style.opacity   = '0';
+            setTimeout(() => { window.location.href = this.href; }, 400);
+        });
+    </script>
 </body>
 </html>
-

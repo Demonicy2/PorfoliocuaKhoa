@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ Kỹ Năng Số | Nhập môn Công nghệ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle-wrapper">
+        <span class="theme-label" id="theme-label">Chế độ Sáng</span>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Chuyển đổi chế độ Sáng/Tối">
+            <div class="toggle-track">
+                <div class="toggle-sun-moon"></div>
+            </div>
+        </button>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3 style="color: var(--primary-color); margin: 0; font-size: 1.5rem; font-weight: 800;">Khoa<span
+                    style="color: var(--accent-color);">.</span></h3>
+            <button class="menu-close" id="menu-close">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="#gioi-thieu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Giới thiệu
+                </a></li>
+            <li class="has-submenu">
+                <a href="#du-an" id="du-an-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                    Dự án
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </a>
+                <ul class="submenu">
+                    <li><a href="#du-an" class="submenu-link" data-target="0">Bài 1: Thao tác tệp tin</a></li>
+                    <li><a href="#du-an" class="submenu-link" data-target="1">Bài 2: Tìm kiếm TT</a></li>
+                    <li><a href="#du-an" class="submenu-link" data-target="2">Bài 3: Viết Prompt</a></li>
+                    <li><a href="#du-an" class="submenu-link" data-target="3">Bài 4: Hợp tác nhóm</a></li>
+                    <li><a href="#du-an" class="submenu-link" data-target="4">Bài 5: AI tạo sinh</a></li>
+                    <li><a href="#du-an" class="submenu-link" data-target="5">Bài 6: AI có trách nhiệm</a></li>
+                </ul>
+            </li>
+            <li><a href="#tong-ket">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Tổng kết
+                </a></li>
+        </ul>
+    </aside>
+
+    <!-- Top Navigation Bar (Mobile Header) -->
+    <nav class="top-nav-mobile">
+        <button class="hamburger" id="hamburger">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <div class="mobile-logo">Khoa's Portfolio</div>
+    </nav>
+    <header class="hero">
+        <!-- Animated Tech Bubbles -->
+        <div class="tech-bubble bubble-pink bubble-1">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+        </div>
+        <div class="tech-bubble bubble-orange bubble-2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+        </div>
+        <div class="tech-bubble bubble-blue bubble-3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                <rect x="9" y="9" width="6" height="6"></rect>
+                <line x1="9" y1="1" x2="9" y2="4"></line>
+                <line x1="15" y1="1" x2="15" y2="4"></line>
+                <line x1="9" y1="20" x2="9" y2="23"></line>
+                <line x1="15" y1="20" x2="15" y2="23"></line>
+                <line x1="20" y1="9" x2="23" y2="9"></line>
+                <line x1="20" y1="14" x2="23" y2="14"></line>
+                <line x1="1" y1="9" x2="4" y2="9"></line>
+                <line x1="1" y1="14" x2="4" y2="14"></line>
+            </svg>
+        </div>
+        <div class="tech-bubble bubble-green bubble-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+            </svg>
+        </div>
+        <div class="tech-bubble bubble-purple bubble-5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+        </div>
+        <div class="tech-bubble bubble-blue bubble-6">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="code-badge">Hồ Sơ Của Tôi</div>
+            <h1>Digital Portfolio</h1>
+            <p class="subtitle">Dự án cuối kỳ môn Nhập môn Công nghệ số & Ứng dụng Trí tuệ nhân tạo</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Trang Giới thiệu -->
+        <section id="gioi-thieu" class="section glass-panel">
+            <h2><span class="section-num">01.</span> Giới thiệu bản thân</h2>
+
+            <div class="profile-wrapper">
+                <div class="left-column">
+                    <div class="profile-sidebar">
+                        <div class="avatar-glow">
+                            <img src="avatar.png" alt="Ảnh cá nhân" class="avatar-img" id="user-avatar">
+                        </div>
+                        <div class="tech-badge">
+                            Sinh viên IT
+                        </div>
+                        <div class="profile-extra">
+                            <p class="location">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                Hải Phòng
+                            </p>
+                            <div class="divider"></div>
+                            <p class="quote">"Học hỏi không ngừng, sáng tạo không giới hạn."</p>
+                        </div>
+                    </div>
+
+                    <!-- Decorative Connect Card -->
+                    <div class="info-item connect-card" style="text-align: center; padding: 25px;">
+                        <h4
+                            style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem; font-weight: 800;">
+                            Kết nối với mình</h4>
+                        <div class="social-links" style="display: flex; justify-content: center; gap: 20px;">
+                            <a href="#" style="color: var(--text-muted); transition: color 0.3s;"><svg width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                    </path>
+                                </svg></a>
+                            <a href="#" style="color: var(--text-muted); transition: color 0.3s;"><svg width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                    </path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg></a>
+                            <a href="#" style="color: var(--text-muted); transition: color 0.3s;"><svg width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg></a>
+                        </div>
+                    </div>
+
+                    <!-- Decorative illustration to fill space -->
+                    <div class="decorative-art" style="text-align: center; margin-top: -10px; opacity: 0.6;">
+                        <svg width="150" height="120" viewBox="0 0 200 150" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 150 Q90 80 40 40" stroke="var(--primary-color)" stroke-width="3" fill="none"
+                                stroke-linecap="round" />
+                            <path d="M100 150 Q110 90 160 50" stroke="var(--primary-color)" stroke-width="3" fill="none"
+                                stroke-linecap="round" />
+                            <path d="M100 150 Q105 50 100 10" stroke="var(--primary-color)" stroke-width="3" fill="none"
+                                stroke-linecap="round" />
+                            <circle cx="40" cy="40" r="8" fill="var(--accent-light)" />
+                            <circle cx="160" cy="50" r="6" fill="var(--accent-light)" />
+                            <circle cx="100" cy="10" r="10" fill="var(--primary-hover)" />
+                            <circle cx="70" cy="70" r="5" fill="var(--primary-hover)" />
+                            <circle cx="120" cy="80" r="7" fill="var(--primary-hover)" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="info-grid custom-grid">
+                    <div class="info-item personal-info tint-blue">
+                        <h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Thông tin cá nhân
+                        </h3>
+                        <ul class="tech-list">
+                            <li><strong>Họ và tên:</strong> Lê Huy Khoa</li>
+                            <li><strong>Ngành học:</strong> Công nghệ thông tin (Trường Đại học Công nghệ, Đại học Quốc
+                                gia Hà Nội - UET - VNU)</li>
+                            <li><strong>Sở thích:</strong> Phát triển phần mềm, Ứng dụng Trí tuệ nhân tạo, Khám phá công
+                                nghệ mới</li>
+                        </ul>
+                        <div class="tech-skills">
+                            <span class="skill-tag">Phát triển phần mềm</span>
+                            <span class="skill-tag">Trí tuệ nhân tạo</span>
+                            <span class="skill-tag">Prompt Engineering</span>
+                            <span class="skill-tag">Công nghệ mới</span>
+                        </div>
+                    </div>
+                    <div class="info-item tint-orange">
+                        <h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="20" x2="12" y2="10"></line>
+                                <line x1="18" y1="20" x2="18" y2="4"></line>
+                                <line x1="6" y1="20" x2="6" y2="16"></line>
+                            </svg>
+                            Định hướng Phát triển
+                        </h3>
+                        <p>Định hướng của mình là liên tục rèn luyện và nâng cao trình độ chuyên môn để trở thành một
+                            <strong>kỹ sư phần mềm</strong> toàn diện. Mình khao khát được tạo ra những sản phẩm số có
+                            giá trị thực tiễn, đặc biệt là các phần mềm kết hợp AI để giải quyết các bài toán trong đời
+                            sống.</p>
+                    </div>
+                    <div class="info-item tint-green">
+                        <h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                                </path>
+                            </svg>
+                            Ý nghĩa của Portfolio
+                        </h3>
+                        <ul class="tech-list">
+                            <li>Đúc kết và hệ thống hóa lại toàn bộ những kỹ năng cốt lõi đã tích lũy qua học phần "Nhập
+                                môn Công nghệ số & Ứng dụng Trí tuệ nhân tạo".</li>
+                            <li>Xây dựng một hồ sơ năng lực trực tuyến chuyên nghiệp nhằm phục vụ cho công việc và học
+                                tập ở các giai đoạn sau.</li>
+                            <li>Liên kết các bài tập thực hành đơn lẻ thành một dự án tổng thể và thống nhất.</li>
+                            <li>Lưu giữ và chia sẻ hành trình trải nghiệm qua 6 nhiệm vụ lớn nhỏ trong suốt khóa học.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trang Dự án -->
+        <section id="du-an" class="section glass-panel">
+            <h2><span class="section-num">02.</span> Dự án & Bài tập</h2>
+            <p class="section-desc">Tập hợp các bài tập và dự án thực hành trong suốt khóa học. <strong>(Nhấn vào từng
+                    bài tập để xem chi tiết)</strong></p>
+
+            <div class="accordion">
+                <!-- Bài tập 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Bài tập 1: Thao tác cơ bản với tệp tin và thư mục
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner split-screen">
+                            <div class="split-left">
+                                <div class="pdf-container">
+                                    <div class="mobile-pdf-fallback">
+                                        <a href="Bai1_ThaoTacCoBan.pdf" target="_blank" class="btn-download">📄 Nhấn vào
+                                            đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
+                                    </div>
+                                    <iframe src="Bai1_ThaoTacCoBan.pdf#view=FitH" width="100%" height="600px"
+                                        style="border: none;"></iframe>
+                                </div>
+                            </div>
+                            <div class="split-right">
+                                <div class="project-info">
+                                    <h4>Mục tiêu:</h4>
+                                    <p>Hiểu và thực hành quản lý tệp tin hiệu quả. Trình bày cấu trúc thư mục tối ưu và
+                                        tuân thủ các quy tắc đặt tên tệp rõ ràng, khoa học.</p>
+                                    <h4>Tóm tắt quá trình thực hiện:</h4>
+                                    <p>Tiến hành thiết lập một cấu trúc cây thư mục logic phục vụ cho việc học tập nhiều
+                                        môn học khác nhau. Áp dụng các quy tắc đặt tên tệp thống nhất (ví dụ:
+                                        TenMon_BaiTap_HoTen) và chụp ảnh minh họa lại quá trình này.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bài tập 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Bài tập 2: Tìm kiếm và đánh giá thông tin học thuật
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner split-screen">
+                            <div class="split-left">
+                                <div class="pdf-container">
+                                    <div class="mobile-pdf-fallback">
+                                        <a href="Bai2_TimKiemThongTin.pdf" target="_blank" class="btn-download">📄 Nhấn
+                                            vào đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
+                                    </div>
+                                    <iframe src="Bai2_TimKiemThongTin.pdf#view=FitH" width="100%" height="600px"
+                                        style="border: none;"></iframe>
+                                </div>
+                            </div>
+                            <div class="split-right">
+                                <div class="project-info">
+                                    <h4>Mục tiêu:</h4>
+                                    <p>Thành thạo sử dụng các toán tử tìm kiếm nâng cao để tra cứu tài liệu học thuật và
+                                        biết cách đánh giá độ tin cậy của các nguồn thông tin.</p>
+                                    <h4>Tóm tắt quá trình thực hiện:</h4>
+                                    <p>Sử dụng các nền tảng như Google Scholar, kết hợp các toán tử (AND, OR, ngoặc kép
+                                        "", site:) để lọc kết quả. Sau đó, lập bảng phân tích, đánh giá các nguồn thông
+                                        tin thu thập được dựa trên tính chính xác, tính khách quan và độ uy tín.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bài tập 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Bài tập 3: Viết Prompt hiệu quả cho các tác vụ học tập
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner split-screen">
+                            <div class="split-left">
+                                <div class="pdf-container">
+                                    <div class="mobile-pdf-fallback">
+                                        <a href="Bai3_VietPrompt.pdf" target="_blank" class="btn-download">📄 Nhấn vào
+                                            đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
+                                    </div>
+                                    <iframe src="Bai3_VietPrompt.pdf#view=FitH" width="100%" height="600px"
+                                        style="border: none;"></iframe>
+                                </div>
+                            </div>
+                            <div class="split-right">
+                                <div class="project-info">
+                                    <h4>Mục tiêu:</h4>
+                                    <p>Tương tác hiệu quả với các công cụ Trí tuệ nhân tạo (Generative AI) bằng cách
+                                        viết lời nhắc (Prompt) tối ưu, rõ ràng và có đầy đủ ngữ cảnh.</p>
+                                    <h4>Tóm tắt quá trình thực hiện:</h4>
+                                    <p>Thực hiện so sánh kết quả sinh ra giữa một prompt cơ bản (ngắn gọn, thiếu ngữ
+                                        cảnh) và một prompt đã được cải tiến (áp dụng các nguyên tắc đóng vai, nêu rõ
+                                        yêu cầu, định dạng đầu ra). Phân tích sự vượt trội về chất lượng câu trả lời từ
+                                        AI.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bài tập 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Bài tập 4: Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner split-screen">
+                            <div class="split-left">
+                                <div class="pdf-container">
+                                    <div class="mobile-pdf-fallback">
+                                        <a href="Bai4_HopTacTrucTuyen.pdf" target="_blank" class="btn-download">📄 Nhấn
+                                            vào đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
+                                    </div>
+                                    <iframe src="Bai4_HopTacTrucTuyen.pdf#view=FitH" width="100%" height="600px"
+                                        style="border: none;"></iframe>
+                                </div>
+                            </div>
+                            <div class="split-right">
+                                <div class="project-info">
+                                    <h4>Mục tiêu:</h4>
+                                    <p>Áp dụng thành thạo các công cụ làm việc nhóm trực tuyến để quản lý tiến độ, chia
+                                        sẻ tài nguyên và duy trì giao tiếp hiệu quả trong dự án.</p>
+                                    <h4>Tóm tắt quá trình thực hiện:</h4>
+                                    <p>Khởi tạo không gian làm việc trên công cụ quản lý dự án, tiến hành phân công
+                                        nhiệm vụ rõ ràng cho từng thành viên. Sử dụng Google Docs/Drive để chỉnh sửa tài
+                                        liệu đồng thời, phối hợp trực tuyến và lưu lại các minh chứng làm việc nhóm.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bài tập 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Bài tập 5: Sử dụng AI tạo sinh hỗ trợ sáng tạo nội dung
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner split-screen">
+                            <div class="split-left">
+                                <div class="pdf-container">
+                                    <div class="mobile-pdf-fallback">
+                                        <a href="Bai5_SangTaoNoiDungAI.pdf" target="_blank" class="btn-download">📄 Nhấn
+                                            vào đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
+                                    </div>
+                                    <iframe src="Bai5_SangTaoNoiDungAI.pdf#view=FitH" width="100%" height="600px"
+                                        style="border: none;"></iframe>
+                                </div>
+                            </div>
+                            <div class="split-right">
+                                <div class="project-info">
+                                    <h4>Mục tiêu:</h4>
+                                    <p>Khai thác tiềm năng của AI tạo sinh (sinh văn bản, hình ảnh) để tối ưu hóa và hỗ
+                                        trợ quá trình sáng tạo nội dung số phong phú.</p>
+                                    <h4>Tóm tắt quá trình thực hiện:</h4>
+                                    <p>Sử dụng AI để gợi ý ý tưởng, phác thảo cấu trúc bài viết và hỗ trợ tạo ra các
+                                        thành phần nội dung số (ví dụ: hình ảnh minh họa). Sau đó, tiến hành chỉnh sửa,
+                                        biên tập lại để tạo ra sản phẩm hoàn thiện mang dấu ấn cá nhân.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bài tập 6 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Bài tập 6: Sử dụng AI có trách nhiệm trong học tập và nghiên cứu
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner split-screen">
+                            <div class="split-left">
+                                <div class="pdf-container">
+                                    <div class="mobile-pdf-fallback">
+                                        <a href="Bai6_AITrachNhiem.pdf" target="_blank" class="btn-download">📄 Nhấn vào
+                                            đây để Xem/Tải File PDF (Dành cho điện thoại)</a>
+                                    </div>
+                                    <iframe src="Bai6_AITrachNhiem.pdf#view=FitH" width="100%" height="600px"
+                                        style="border: none;"></iframe>
+                                </div>
+                            </div>
+                            <div class="split-right">
+                                <div class="project-info">
+                                    <h4>Mục tiêu:</h4>
+                                    <p>Nhận thức sâu sắc về các vấn đề đạo đức, liêm chính học thuật khi ứng dụng AI và
+                                        xây dựng được bộ nguyên tắc cá nhân trong việc sử dụng.</p>
+                                    <h4>Tóm tắt quá trình thực hiện:</h4>
+                                    <p>Nghiên cứu các rủi ro tiềm ẩn như đạo văn, thiên kiến thuật toán, thông tin sai
+                                        lệch. Từ đó, xây dựng một bản tuyên ngôn/bộ nguyên tắc cá nhân cam kết về việc
+                                        sử dụng AI một cách minh bạch, có trách nhiệm và tôn trọng bản quyền.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Trang Tổng kết -->
+        <section id="tong-ket" class="section glass-panel">
+            <h2><span class="section-num">03.</span> Tổng kết</h2>
+            <div class="summary-content">
+                <div class="summary-card">
+                    <h4>Trải nghiệm và Cảm nhận cá nhân</h4>
+                    <p>Quá trình xây dựng Portfolio và thực hiện các bài tập thực sự là một hành trình thú vị. Nó không
+                        chỉ giúp tôi hệ thống hóa lại toàn bộ kiến thức đã học mà còn tạo ra một sản phẩm thực tế để tự
+                        nhìn nhận lại sự phát triển kỹ năng số của chính mình.</p>
+                </div>
+                <div class="summary-card">
+                    <h4>Kiến thức và Kỹ năng quan trọng nhất</h4>
+                    <p>Tôi đánh giá cao nhất kỹ năng <strong>Viết Prompt (Prompt Engineering)</strong> và kỹ năng
+                        <strong>Đánh giá thông tin học thuật</strong>. Đây là hai công cụ cốt lõi giúp tôi khai thác tri
+                        thức trong thời đại số một cách nhanh chóng nhưng vẫn đảm bảo sự chính xác và tin cậy.</p>
+                </div>
+                <div class="summary-card">
+                    <h4>Điểm tâm đắc và Thách thức</h4>
+                    <p><strong>Tâm đắc:</strong> Khám phá ra rằng AI là một trợ thủ vô cùng đắc lực, giúp tiết kiệm thời
+                        gian đáng kể nếu ta biết cách kiểm soát và sử dụng nó một cách có trách nhiệm.<br><br>
+                        <strong>Thách thức:</strong> Thử thách lớn nhất là việc biên tập lại nội dung của 6 bài tập sao
+                        cho súc tích, dễ hiểu và trình bày trên Portfolio một cách chuyên nghiệp, đẹp mắt nhất. Tuy
+                        nhiên, thách thức này đã giúp tôi cải thiện đáng kể tư duy thiết kế và tổng hợp thông tin.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Digital Portfolio. Lê Huy Khoa -IT6- K70 UET.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
