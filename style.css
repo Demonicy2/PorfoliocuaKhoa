@@ -928,7 +928,8 @@ footer {
     transition: transform 0.3s ease;
 }
 
-.has-submenu.open .chevron {
+.has-submenu.open .chevron,
+.has-submenu:hover .chevron {
     transform: rotate(180deg);
 }
 
@@ -939,7 +940,8 @@ footer {
     display: none;
 }
 
-.has-submenu.open .submenu {
+.has-submenu.open .submenu,
+.has-submenu:hover .submenu {
     display: block;
     animation: fadeIn 0.3s ease;
 }
