@@ -971,9 +971,14 @@ footer {
     box-shadow: none;
 }
 
-/* Main Content Adjustments for Desktop Sidebar */
 body {
     transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: pageFadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; transform: translateY(15px); filter: blur(5px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
 body.sidebar-open {
