@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             
             // Close sidebar only on mobile (desktop keeps it open)
-            if (window.innerWidth <= 992 && sidebar) {
+            if (window.innerWidth <= 768 && sidebar) {
                 sidebar.classList.remove('active');
                 document.body.classList.remove('sidebar-open');
             }
