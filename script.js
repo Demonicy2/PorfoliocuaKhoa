@@ -124,4 +124,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // -----------------------------------------------------
+    // 6. Smooth Exit to Welcome Page
+    // -----------------------------------------------------
+    const btnBackHome = document.getElementById('btn-back-home');
+    if (btnBackHome) {
+        btnBackHome.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(20px)';
+            document.body.style.filter = 'blur(10px)';
+            setTimeout(() => { window.location.href = this.href; }, 700);
+        });
+    }
 });

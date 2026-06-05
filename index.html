@@ -297,9 +297,10 @@
             transition: opacity 0.2s;
         }
         .btn-enter:hover { 
-            transform: translateY(-5px) scale(1.05); 
-            box-shadow: 0 10px 30px rgba(139,61,255,0.6); 
-            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            transform: translateY(-8px) scale(1.15); 
+            box-shadow: 0 15px 40px rgba(255, 140, 0, 0.6), 0 0 25px rgba(139, 61, 255, 0.8); 
+            background: linear-gradient(135deg, #ff8c00, #ec4899);
+            color: #fff;
         }
         .btn-enter:hover::before { opacity: 1; }
         .btn-enter svg { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -392,7 +393,7 @@
         const lbl  = document.getElementById('theme-label');
 
         // Sync with saved preference
-        const saved = localStorage.getItem('theme') || 'light';
+        const saved = localStorage.getItem('portfolio-theme') || 'light';
         html.setAttribute('data-theme', saved);
         lbl.textContent = saved === 'dark' ? 'Chế độ Tối' : 'Chế độ Sáng';
 
@@ -401,7 +402,7 @@
             const next   = isDark ? 'light' : 'dark';
             html.setAttribute('data-theme', next);
             lbl.textContent = next === 'dark' ? 'Chế độ Tối' : 'Chế độ Sáng';
-            localStorage.setItem('theme', next);
+            localStorage.setItem('portfolio-theme', next);
         });
 
         // Fade out on navigate with WOW effect

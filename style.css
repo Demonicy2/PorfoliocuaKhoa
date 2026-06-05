@@ -1056,7 +1056,36 @@ body.sidebar-open .container {
     z-index: 1000;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
+}
+
+.btn-back-home {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--text-main);
+    background: var(--bg-card);
+    padding: 8px 16px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--card-border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+}
+
+.btn-back-home:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+.btn-back-home:hover svg {
+    transform: translateX(-3px);
+}
+.btn-back-home svg {
+    transition: transform 0.3s ease;
 }
 
 .theme-label {
@@ -1138,9 +1167,10 @@ body.sidebar-open .container {
     .theme-toggle-wrapper {
         top: 15px;
         right: 20px;
+        gap: 10px;
     }
-    .theme-label {
-        display: none; /* Hide label on mobile to save space */
+    .theme-label, .back-label {
+        display: none; /* Hide labels on mobile to save space */
     }
 }
 
