@@ -86,12 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }, 150);
             }
-            
-            // Close sidebar only on mobile (desktop keeps it open)
-            if (window.innerWidth <= 768 && sidebar) {
-                sidebar.classList.remove('active');
-                document.body.classList.remove('sidebar-open');
-            }
+            // Sidebar will not auto-close when a link is clicked, allowing it to stay open as an overlay.
         });
     });
 
