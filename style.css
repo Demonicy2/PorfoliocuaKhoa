@@ -194,6 +194,13 @@ strong {
     text-transform: uppercase;
     letter-spacing: 1px;
     box-shadow: 0 4px 15px rgba(139, 61, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.code-badge:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.5);
+    letter-spacing: 2px;
 }
 
 .hero h1 {
@@ -209,6 +216,12 @@ strong {
     margin-bottom: 25px;
     letter-spacing: -1.5px;
     line-height: 1.1;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
+}
+
+.hero h1:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 15px 35px rgba(139, 61, 255, 0.4));
 }
 
 @keyframes gradientShift {
@@ -245,6 +258,13 @@ strong {
     line-height: 1.6;
     letter-spacing: -0.3px;
     text-shadow: 0 4px 15px rgba(255, 255, 255, 0.8);
+    transition: all 0.4s ease;
+}
+
+.hero .subtitle:hover {
+    color: var(--primary-color);
+    transform: translateY(5px);
+    letter-spacing: 0.5px;
 }
 
 /* Sections */
@@ -393,9 +413,9 @@ section h2:hover .section-num {
 }
 
 @keyframes glowPulse {
-    0% { box-shadow: 0 10px 25px rgba(139, 61, 255, 0.15); }
-    50% { box-shadow: 0 15px 35px rgba(139, 61, 255, 0.4), 0 0 20px rgba(139, 61, 255, 0.2); }
-    100% { box-shadow: 0 10px 25px rgba(139, 61, 255, 0.15); }
+    0% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 10px rgba(139, 61, 255, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.8), 0 0 25px rgba(139, 61, 255, 0.5); }
+    100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 10px rgba(139, 61, 255, 0.2); }
 }
 
 .avatar-glow {
@@ -403,12 +423,12 @@ section h2:hover .section-num {
     width: 240px;
     height: 240px;
     border-radius: 50%;
-    padding: 6px;
-    background: var(--bg-card);
+    padding: 0; /* Removed the transparent gap to fix the ugly background bleed */
+    border: 6px solid #3b82f6; /* Blue neon border */
     margin-top: -120px;
     margin-bottom: 25px;
     z-index: 1;
-    box-shadow: 0 10px 25px rgba(139, 61, 255, 0.15);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); /* Base glow */
     animation: glowPulse 4s infinite ease-in-out;
 }
 
@@ -417,7 +437,7 @@ section h2:hover .section-num {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    border: 6px solid var(--bg-card);
+    border: none; /* Border moved to outer wrapper */
 }
 
 .tech-badge {

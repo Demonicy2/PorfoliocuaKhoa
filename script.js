@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
         animateCursor();
 
         // Add hover effects for clickable elements
-        const hoverElements = document.querySelectorAll('a, button, section h2, .skill-tag, .info-item, .profile-sidebar, .tech-badge, .accordion-item');
+        const hoverElements = document.querySelectorAll('a, button, section h2, .code-badge, .hero h1, .hero .subtitle, .skill-tag, .info-item, .profile-sidebar, .tech-badge, .accordion-item');
         
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
