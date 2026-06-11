@@ -26,71 +26,57 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // -----------------------------------------------------
-    // 2. Sidebar Toggle Logic (Mobile)
+    // 2. Scroll Spy Logic for Top Nav
     // -----------------------------------------------------
-    const hamburger = document.getElementById('hamburger');
-    const sidebar = document.getElementById('sidebar');
-    const menuClose = document.getElementById('menu-close');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    if (hamburger && sidebar && menuClose) {
-        hamburger.addEventListener('click', () => {
-            sidebar.classList.add('active');
-            document.body.classList.add('sidebar-open');
-        });
+    function updateNavOnScroll() {
+        let currentSectionId = '';
+        const scrollPosition = window.scrollY + 100; // Offset for the fixed nav
 
-        menuClose.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            document.body.classList.remove('sidebar-open');
-        });
-    }
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top + window.scrollY;
+            const sectionHeight = section.offsetHeight;
 
-    // -----------------------------------------------------
-    // 3. Submenu Toggle Logic
-    // -----------------------------------------------------
-    const duAnLink = document.getElementById('du-an-link');
-    if (duAnLink) {
-        duAnLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            const parentLi = duAnLink.parentElement;
-            parentLi.classList.toggle('open');
-        });
-    }
-
-    // -----------------------------------------------------
-    // 4. Submenu Link Scroll & Open Accordion Logic
-    // -----------------------------------------------------
-    const submenuLinks = document.querySelectorAll('.submenu-link');
-    submenuLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetIndex = link.getAttribute('data-target');
-            // Find the target accordion header
-            const targetHeader = accordionHeaders[targetIndex];
-            
-            if (targetHeader) {
-                // Open accordion if not already open (do this first to trigger layout changes)
-                if (!targetHeader.classList.contains('active')) {
-                    targetHeader.click();
-                }
-                
-                // Wait slightly for the accordion to close others and open this one, 
-                // preventing blurry iframe rendering during concurrent scroll + CSS animation.
-                setTimeout(() => {
-                    const headerOffset = 80; 
-                    const elementPosition = targetHeader.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }, 150);
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                currentSectionId = section.getAttribute('id');
             }
+        });
+
+        // Special case: if scrolled to the very bottom, select the last section
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+            currentSectionId = sections[sections.length - 1].getAttribute('id');
+        }
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + currentSectionId) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateNavOnScroll);
+    updateNavOnScroll(); // Initial call
+
+    // -----------------------------------------------------
+    // 3. Smooth Scroll for Nav Links
+    // -----------------------------------------------------
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
             
-            // Close sidebar only on mobile (desktop keeps it open)
-            if (window.innerWidth <= 768 && sidebar) {
-                sidebar.classList.remove('active');
-                document.body.classList.remove('sidebar-open');
+            if (targetSection) {
+                const rect = targetSection.getBoundingClientRect();
+                const absoluteTop = rect.top + window.scrollY;
+                window.scrollTo({
+                    top: absoluteTop - 100, // Offset for navbar
+                    behavior: 'smooth'
+                });
             }
         });
     });
@@ -137,6 +123,52 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.style.transform = 'translateY(20px)';
             document.body.style.filter = 'blur(10px)';
             setTimeout(() => { window.location.href = this.href; }, 700);
+        });
+    }
+
+    // -----------------------------------------------------
+    // 7. Sci-Fi Custom Cursor Logic
+    // -----------------------------------------------------
+    const cursorDot = document.querySelector('[data-cursor-dot]');
+    const cursorOutline = document.querySelector('[data-cursor-outline]');
+    
+    if (cursorDot && cursorOutline) {
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let dotX = mouseX;
+        let dotY = mouseY;
+        let outlineX = mouseX;
+        let outlineY = mouseY;
+        
+        window.addEventListener('mousemove', function (e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        function animateCursor() {
+            dotX += (mouseX - dotX) * 0.6;
+            dotY += (mouseY - dotY) * 0.6;
+            
+            outlineX += (mouseX - outlineX) * 0.25;
+            outlineY += (mouseY - outlineY) * 0.25;
+            
+            cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+            cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
+            
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Add hover effects for clickable elements
+        const hoverElements = document.querySelectorAll('a, button, section h2, .skill-tag, .info-item, .profile-sidebar, .tech-badge, .accordion-item');
+        
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.body.classList.add('cursor-hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                document.body.classList.remove('cursor-hover');
+            });
         });
     }
 });
